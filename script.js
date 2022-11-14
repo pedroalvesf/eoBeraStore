@@ -1,7 +1,7 @@
 
 const containerItens = document.querySelector(".container-first");
 
-function createCard(){
+function createCard(weaponLink, weaponName, skinLink, skinName, weaponImg, weaponPrice, weaponPriceStattrack, weaponCollection, inspectInGameLink){
  `   <div class="card-item">
     <h3>
         <a href="${weaponLink}">${weaponName} | </a>
@@ -21,8 +21,10 @@ function createCard(){
         <p>${weaponCollection}</p>
     </div>
     <div class="btn-inspect">
-        <p>Inspect in game</p>
-        <p>Steam linking</p>
+    <p><a href="${inspectInGameLink}">Inspect in game</a></p>
+    <p><a href="#">ISteam linking</a></p>
     </div>
 </div>`
 }
+
+//237|GQbbdWPZmMmjZiUUT7oFIkfYsTJ4SHXAte5Eny8g
