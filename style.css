@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(287.56deg, #e24343 0%, #6000af 100%);
+}
+.top-bar{
+    border: 1px solid white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.link-follows-header{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.container-header{
+display: inline-block;
+width: 100%;
+}
+.logo-test-img{
+    border-radius: 20px;
+}
+.container-search{
+        border: 1px solid red;
+        background-color: white;
+        padding: 20px 10px;
+        border-radius: 15px;
+        box-shadow: 0 15px 30px black;
+        display: flex;
+        text-align: center;
+
+    }
+.search-text-input{
+    width: 80%;
+    font-weight: 500;
+}
+
+/* Style buttons */
+.btn {
+    background-color: DodgerBlue; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    margin: 10px;
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: RoyalBlue;
+  }
