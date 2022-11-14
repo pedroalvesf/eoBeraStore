@@ -1,16 +1,28 @@
 
-/* <li class="list-type">
-<img class="pri" src="https://i.imgur.com/eDnel23.png">
-</li>
-<li class="list-type">
-   <img class="pri" src="https://i.imgur.com/xBrqtZx.png">
-</li>
-<li class="list-type">
-   <img class="pri" src="https://i.imgur.com/o9Sub15.png">
-</li>
-<li class="list-type">
-   <img class="pri" src="https://i.imgur.com/Z67nTWp.png">
-</li>
-<li class="list-type">
-   <img class="pri" src="https://i.imgur.com/qzyRsro.png">
-</li> */
+const containerItens = document.querySelector(".container-first");
+
+function createCard(){
+ `   <div class="card-item">
+    <h3>
+        <a href="${weaponLink}">${weaponName} | </a>
+        <a href="${skinLink}">${skinName}</a>
+    </h3>
+    <div class="stattrack">
+            <p>StatTrack</p>
+    </div>
+    <a>
+    <img src="${weaponImg}">
+    </a>
+    <div class="price">
+        <p>${weaponPrice}</p>
+        <p>${weaponPriceStattrack}</p>
+    </div>      
+    <div class="collection">
+        <p>${weaponCollection}</p>
+    </div>
+    <div class="btn-inspect">
+        <p>Inspect in game</p>
+        <p>Steam linking</p>
+    </div>
+</div>`
+}
