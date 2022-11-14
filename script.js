@@ -1,14 +1,25 @@
 
-const containerItens = document.querySelector(".container-first");
+const containerItens = document.querySelector(".container-itens");
 const btnNextSkinGoal = document.querySelector(".new-skin-button")
 const weaponsListTest = [{ 
-    weaponLink: "src(awp-g.png)",
+    weaponLink: "#",
     weaponName: "AWP",
-    skinLink: "src(awp-g.png)",
+    skinLink: "#",
     skinName: "Gungnir",
-    weaponImg: "src(awp-g.png)",
-    weaponPrice: "1000",
-    weaponPriceStattrack: "5000",
+    weaponImg: "./awp-g.png",
+    weaponPrice: "R$ 5.000,00 - R$ 6.500",
+    weaponPriceStattrack: "R$ 8.500 - R$ 11.500",
+    weaponCollection: "The Norse Collection",
+    inspectInGameLink: "#"
+},
+{ 
+    weaponLink: "#",
+    weaponName: "AK-47",
+    skinLink: "#",
+    skinName: "Fire-Serpent",
+    weaponImg: "./awp-g.png",
+    weaponPrice: "R$ 3.500,00 - R$ 4.500",
+    weaponPriceStattrack: "R$ 6.500 - R$ 7.500",
     weaponCollection: "The Norse Collection",
     inspectInGameLink: "#"
 }
@@ -35,7 +46,7 @@ function createCard(weaponLink, weaponName, skinLink, skinName, weaponImg, weapo
     </div>
     <div class="btn-inspect">
     <p><a  class="text-btn-inspect" href="${inspectInGameLink}">Inspect in game</a></p>
-    <p><a  class="text-btn-inspect" href="#">ISteam linking</a></p>
+    <p><a  class="text-btn-inspect" href="#">Steam linking</a></p>
     </div>
 </div>`
 return html;
@@ -55,7 +66,7 @@ btnNextSkinGoal.addEventListener("click", () =>{
         weaponsListTest[0].weaponPriceStattrack, 
         weaponsListTest[0].weaponCollection, 
         weaponsListTest[0].inspectInGameLink);
-        containerItens.insertAdjacentHTML('afterBegin', insertItem);
+        containerItens.insertAdjacentHTML('beforeEnd', insertItem);
 })
 
 
