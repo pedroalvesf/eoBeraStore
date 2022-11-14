@@ -9,19 +9,31 @@ body {
 }
 .top-bar{
     border: 1px solid white;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+
 }
-.link-follows-header{
-    text-decoration: none;
+
+.inner-top-bar{
     display: flex;
     flex-direction: row;
 }
 
+.row{
+    display: flex;
+    flex-direction: row;
+}
+.link-follows-header{
+
+
+}
+
 .container-header{
-display: inline-block;
 width: 100%;
+}
+
+.top-bar{
+    display: flex;
+    flex-direction: row;
+
 }
 .logo-test-img{
     border-radius: 20px;
