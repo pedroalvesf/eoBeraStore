@@ -4,15 +4,101 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: linear-gradient(287.56deg, #e24343 0%, #6000af 100%);
+    background-color: #090D11;
 }
 
 .container-header{
+    position: fixed;
+    z-index: 1;
     width: 100%;
-    padding-top: 30px;
-        
+    padding: 10px;
+    padding-top: 40px;
+    background-color: #101820;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-    
+
+.header-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container-logo{
+    display: flex;
+    flex-direction: row;
+}
+.container-logo p {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.logo{
+    padding-left: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.container-search{
+    width: 20vw;
+    max-width: 270px;
+}
+
+#search {
+    height: 30px;
+    margin-left: 40px;
+    padding-left: 20px;
+    border-radius: 20px;
+    height: 45px;
+    width: 90%;
+    background-color: #252f3a93;
+    border: none;
+    color: white;
+}
+
+.container-login{
+    display: flex;
+    flex-direction: row;
+    padding-right: 30px;
+    gap: 50px;
+}
+
+.button{
+    height: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #252f3a93;
+    color: white;
+    border-radius: 10px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor:pointer;
+}
+
+.button:hover{
+    transform: scale(1.1);
+    transition: 0.3;
+}
+
+.button-wish{
+    color: gray;
+    font-size: 20px;
+    user-select: none;
+}
+
+.button-wish:hover{
+    color: white;
+    cursor:pointer;
+}
+
+
 .top-bar{
     display: flex;
     flex-direction: row;
@@ -22,6 +108,7 @@ body {
     top: 0;
     background-color: gray;
     width: 100%;
+    z-index: 2;
 }
 
 .inner-top-bar{
@@ -43,8 +130,6 @@ justify-content: space-around;
 .link-follows-header{
 display: flex;
 flex-direction: row;
-
-
 }
 
 .top-bar{
@@ -53,7 +138,7 @@ flex-direction: row;
     justify-content: space-around;
 
 }
-.container-links li{    
+.container-links li{
     width: 30px;
     list-style-type: none;
 }
@@ -61,70 +146,6 @@ flex-direction: row;
     text-decoration: none;
     color: white;
 }
-
-.container-logo{
-    padding: 5px;   
-}
-
-.logo-test-img{
-    border-radius: 20px;
-}
-
-.container-buttons{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-
-}
-.container-search{
-        border: 1px solid red;
-        width: 60%;
-        padding: 10px 10px;
-        box-shadow: 0 15px 30px black;
-        display: flex;
-        text-align: center;
-        justify-content: center;
-    }
-.search-text-input{
-    width: 60%;
-    border-radius: 30px  0px   0px 30px;
-    font-weight: 500;
-    height: 40px;
-    padding-left: 30px;
-    font-size: 16px;
-}
-
-/* Style buttons */
-.btn {
-    background-color: DodgerBlue; /* Blue background */
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 12px 16px; /* Some padding */
-    margin: 10px;
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
-  }
-.new-skin-button{
-
-    width: 7%;
-    font-size: 2;
-    color: white;
-    border: none;
-    opacity: 1;
-    background-color: #6000af;
-    border-radius: 0px 30px 30px 0px;
-
-}
-
-.new-skin-button:hover{
-    transform: scale(1.1);
-    transition: 0.4s;
-}
-  /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: RoyalBlue;
-  }
 
   .container-list-type{
     display: flex;
@@ -134,7 +155,7 @@ flex-direction: row;
     height: 30%;
     justify-content: center;
     align-items: center;
-
+    margin-top: 300px;
   }
 
 .list-type{   
@@ -151,7 +172,6 @@ flex-direction: row;
     font-size: 20px;
     color: white;
   }
-  
   .seg:hover{
     transform: scale(1.1);
     transition: 0.5s;
@@ -230,3 +250,4 @@ h3 a{
     align-self: center;
     width: 90%;
 }
+

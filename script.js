@@ -41,25 +41,25 @@ const html = `<div class="card-item">
 return html;
 }
 
-console.log(btnNextSkinGoal)
-btnNextSkinGoal.addEventListener("click", () =>{
-    localStorage.setItem("weaponList",JSON.stringify(weaponsListTest))
-    //adiciona novo item no array
-    //no caso é só um teste, mas a ideia é fazer isso pegando as informações dos inputs
-    const newItem = {
-        weaponLink: "#",
-        weaponName: "AK-47",
-        skinLink: "#",
-        skinName: "Fire-Serpent",
-        weaponImg: "./src/img/awp-g.png",
-        weaponPrice: "R$ 3.500,00 - R$ 4.500",
-        weaponPriceStattrack: "R$ 6.500 - R$ 7.500",
-        weaponCollection: weaponsListTest.length,
-        inspectInGameLink: "#"
-    }
-    weaponsListTest.push(newItem)
-    renderItem(newItem)
-})
+// console.log(btnNextSkinGoal)
+// btnNextSkinGoal.addEventListener("click", () =>{
+//     localStorage.setItem("weaponList",JSON.stringify(weaponsListTest))
+//     //adiciona novo item no array
+//     //no caso é só um teste, mas a ideia é fazer isso pegando as informações dos inputs
+//     const newItem = {
+//         weaponLink: "#",
+//         weaponName: "AK-47",
+//         skinLink: "#",
+//         skinName: "Fire-Serpent",
+//         weaponImg: "./src/img/awp-g.png",
+//         weaponPrice: "R$ 3.500,00 - R$ 4.500",
+//         weaponPriceStattrack: "R$ 6.500 - R$ 7.500",
+//         weaponCollection: weaponsListTest.length,
+//         inspectInGameLink: "#"
+//     }
+//     weaponsListTest.push(newItem)
+//     renderItem(newItem)
+// })
 
 function renderItem(weapon){
     localStorage.setItem("weaponList",JSON.stringify(weaponsListTest))
@@ -105,3 +105,5 @@ weaponsListTest.forEach((weapon) => {
 //237|GQbbdWPZmMmjZiUUT7oFIkfYsTJ4SHXAte5Eny8g
 
 // https://steamcommunity.com/market/priceoverview/?country=BR&currency=7&appid=730&market_hash_name=P250%20%7C%20Asiimov%20(Minimal%20Wear)
+
+
