@@ -43,6 +43,10 @@ body {
     border-radius: 50%;
 }
 
+.container-logo a{
+    text-decoration: none;
+}
+
 .container-search{
     width: 20vw;
     max-width: 270px;
@@ -147,6 +151,65 @@ flex-direction: row;
     color: white;
 }
 
+.container-filter-itens{
+    width: 86vw;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 15px;
+    background-color: #101820;
+    color: grey;
+    margin-top: 450px;
+    margin-bottom: 10px;
+    gap: 20px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter-itens-middle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+    background-color: #090D11;
+
+}
+.dropdown-content div{
+    padding: 15px;    
+}
+.dropdown:hover .dropdown-content{
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-type{
+    background-color: #252f3a93;
+    border-radius: 10px;
+    height: 40px;
+}
+
+.all:hover{
+    transform:scale(1);
+}
+
+.dropdown-content div:hover{
+    color: white;
+}
+
+
+.filter-itens-order, .filter-itens-filter{
+    margin:0 20px 0 20px;
+    background-color: #252f3a93;
+    border-radius: 10px;
+    height: 40px;
+} 
+
   .container-list-type{
     display: flex;
     flex-direction: row;
@@ -196,7 +259,7 @@ flex-direction: row;
     flex-wrap: wrap;
     width: 88%;
     justify-content: center;
-    padding-top: 200px;
+
 }
 
 .card-item{
@@ -206,8 +269,8 @@ flex-direction: row;
     display: flex;
     flex-direction: column;
     background-color: #1C1E22;
-    height: 530px;
-    width: 340px;
+    height: 370px;
+    width: 270px;
     color: white;
     border-radius: 10px;
     margin: 2px;
@@ -216,8 +279,14 @@ flex-direction: row;
 
 .card-item img{
     width: 95%;
-    padding-top: 20px;
 }
+.card-item h3{
+    font-size: 14px;
+
+}
+
+
+
 .stattrack{
     background-color: orangered;
     align-self: center;
@@ -273,3 +342,6 @@ h3 a{
     transform: scale(1);
     cursor: pointer;
 }
+
+
+

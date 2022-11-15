@@ -16,14 +16,14 @@ async function getDb() {
     const res = await fetch("./src/img/csgoitems.JSON");
     data = await res.json();
     itemsToShow = data['items_list'];
-    listItems(itemsToShow, 1, 10).forEach((weapon) => {
+    listItems(itemsToShow, 1, 18).forEach((weapon) => {
         renderItem(weapon)
     });
     createPagination()
 }
 getDb()
 
-function createCard(weaponLink, weaponName, weaponImg, weaponPrice, weaponExterior, inspectInGameLink, weaponStatTrack) {
+function createCard(weaponLink, weaponName, weaponImg, weaponPrice, weaponExterior, weaponStatTrack) {
     const html = `<div class="card-item">
     <h3>
         <a href="${weaponLink}">${weaponName}</a>
@@ -32,19 +32,15 @@ function createCard(weaponLink, weaponName, weaponImg, weaponPrice, weaponExteri
             `<div class="stattrack">
     <p>StatTrack</p>
     </div>` : ''}
-    <a>
+    <div class="container-weapon-image">
     <img src="${weaponImg}">
-    </a>
+    </div>
     <div class="price">
         <p>${weaponPrice}</p>
     </div>
     ${weaponExterior != 'undefined'? `<div class="exterior">
         <p>${weaponExterior}</p>
     </div>`: ''}
-    <div class="btn-inspect">
-    <p><a  class="text-btn-inspect" href="${inspectInGameLink}">Inspect in game</a></p>
-    <p><a  class="text-btn-inspect" href="#">Steam linking</a></p>
-    </div>
 </div>`
     return html;
 }
@@ -57,7 +53,6 @@ function renderItem(weapon) {
         `https://community.cloudflare.steamstatic.com/economy/image/${weapon.icon_url}`,
         `U$${weapon.price["7_days"].median != 'undefined'? weapon.price["7_days"].median : '0.00'}`,
         `${weapon.exterior}`,
-        '',
         weapon.stattrak
         ));
     } catch (error) {
@@ -104,27 +99,27 @@ function createPagination() {
 pages.addEventListener('click', (e) => {
     if (e.target.classList.contains('page')) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, Number(e.target.textContent), 10).forEach((weapon) => {
+        listItems(itemsToShow, Number(e.target.textContent), 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-next')) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual + 1, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual + 1, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-previous')&& pageActual > 1) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual - 1, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual - 1, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-next-plus')) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual + 4, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual + 4, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-previous-plus') && pageActual > 5) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual - 4, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual - 4, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }
@@ -149,7 +144,7 @@ function filterItems(e){
     Object.keys(filteredWeapons).forEach((weapon) => {
         itemsFiltered.push(data['items_list'][weapon])
     })
-    listItems(itemsFiltered, 1, 10).forEach((weapon) => {
+    listItems(itemsFiltered, 1, 18).forEach((weapon) => {
         renderItem(weapon)
     });
     return itemsFiltered;
