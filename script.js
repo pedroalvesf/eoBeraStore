@@ -7,6 +7,7 @@ let weaponsList = [
     'AWP | Electric Hive (Field-Tested)',
     'USP-S | Printstream (Field-Tested)'
 ]
+
 if (JSON.parse(localStorage.getItem('weaponList'))) {
     weaponsList = JSON.parse(localStorage.getItem('weaponList'))
 }
@@ -15,7 +16,6 @@ async function getDb() {
     const res = await fetch("./src/img/csgoitems.JSON");
     data = await res.json();
     itemsToShow = data['items_list'];
-    console.log(['AWP | Electric Hive (Field-Tested)']);
     listItems(itemsToShow, 1, 10).forEach((weapon) => {
         renderItem(weapon)
     });
@@ -50,7 +50,6 @@ function createCard(weaponLink, weaponName, weaponImg, weaponPrice, weaponExteri
 }
 
 function renderItem(weapon) {
-    localStorage.setItem("weaponList", JSON.stringify(weaponsList))
     try {
         containerItems.insertAdjacentHTML('beforeEnd', createCard(
         'weaponLink',
@@ -59,7 +58,8 @@ function renderItem(weapon) {
         `U$${weapon.price["7_days"].median != 'undefined'? weapon.price["7_days"].median : '0.00'}`,
         `${weapon.exterior}`,
         '',
-        weapon.stattrak));
+        weapon.stattrak
+        ));
     } catch (error) {
         console.log(error)
     }
@@ -69,7 +69,6 @@ function renderItem(weapon) {
 
 function listItems(items, actualPage, limitItems) {
     pageActual = actualPage;
-    console.log(pageActual, 'listItems')
     let result = [];
     let totalPage = Math.ceil(Object.keys(items).length / limitItems);
     let count = (actualPage * limitItems) - limitItems;
@@ -94,14 +93,11 @@ function createPagination() {
     html += `<li class="button page-previous-plus ${pageActual < 4? 'unClick':''}"><<</li>`
     html += `<li class="button page-previous ${pageActual <= 1? 'unClick':''}"><</li>`
     for (let i = pageActual; i < pageActual + 4; i+=1) {
-        if(i === pageActual + 3) {
-            html += `<li class="button page-next">></li>`
-            html += `<li class="button page-next-plus">>></li>`
-            html += `<li class="button page">${pageActual+40}</li>`
-            continue;
-        }
         html += `<li class="button page">${i}</li>`
     }
+    html += `<li class="button page-next">></li>`
+    html += `<li class="button page-next-plus">>></li>`
+    html += `<li class="button page">${pageActual+40}</li>`
     pages.innerHTML = html;
 }
 
@@ -133,14 +129,15 @@ pages.addEventListener('click', (e) => {
         });
     }
     createPagination()
+    topFunction()
 })
 
 function filterObject(obj, callback) {
     return Object.fromEntries(Object.entries(obj).
-      filter(([key, val]) => callback(val, key)));
-  }
+    filter(([key, val]) => callback(val, key)));
+}
 
-search.addEventListener('keyup', (e) => {
+function filterItems(e){
     let itemsFiltered = []
     const searchValue = e.target.value.trim().toLowerCase();
     const filteredWeapons = filterObject(data['items_list'], (weapon) => {
@@ -149,13 +146,21 @@ search.addEventListener('keyup', (e) => {
         }
     })
     containerItems.innerHTML = '';
-    console.log(filteredWeapons)
     Object.keys(filteredWeapons).forEach((weapon) => {
         itemsFiltered.push(data['items_list'][weapon])
     })
     listItems(itemsFiltered, 1, 10).forEach((weapon) => {
         renderItem(weapon)
     });
-    itemsToShow = itemsFiltered;
+    return itemsFiltered;
+}
+
+search.addEventListener('keyup', (e) => {
+    itemsToShow = filterItems(e)
     createPagination()
 })
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
