@@ -1,7 +1,7 @@
 
 const containerItems = document.querySelector(".container-itens");
 const search = document.querySelector("#search");
-let data, pageActual
+let data, pageActual, itemsToShow = [];
 
 let weaponsList = [
     'AWP | Electric Hive (Field-Tested)',
@@ -14,7 +14,7 @@ if (JSON.parse(localStorage.getItem('weaponList'))) {
 async function getDb() {
     const res = await fetch("./src/img/csgoitems.JSON");
     data = await res.json();
-    const itemsToShow = data['items_list'];
+    itemsToShow = data['items_list'];
     console.log(['AWP | Electric Hive (Field-Tested)']);
     listItems(itemsToShow, 1, 10).forEach((weapon) => {
         renderItem(weapon)
