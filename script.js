@@ -1,6 +1,6 @@
 
 const containerItems = document.querySelector(".container-itens");
-const btnNextSkinGoal = document.querySelector(".new-skin-button")
+const search = document.querySelector("#search");
 let data, pageActual
 
 let weaponsList = [
@@ -14,8 +14,9 @@ if (JSON.parse(localStorage.getItem('weaponList'))) {
 async function getDb() {
     const res = await fetch("./src/img/csgoitems.JSON");
     data = await res.json();
-    console.log(data['items_list']['AWP | Electric Hive (Field-Tested)']);
-    listItems(data['items_list'], 1, 10).forEach((weapon) => {
+    const itemsToShow = data['items_list'];
+    console.log(['AWP | Electric Hive (Field-Tested)']);
+    listItems(itemsToShow, 1, 10).forEach((weapon) => {
         renderItem(weapon)
     });
     createPagination()
@@ -58,7 +59,7 @@ function renderItem(weapon) {
         `U$${weapon.price["7_days"].median != 'undefined'? weapon.price["7_days"].median : '0.00'}`,
         `${weapon.exterior}`,
         '',
-        ''));
+        weapon.stattrak));
     } catch (error) {
         console.log(error)
     }
@@ -88,7 +89,6 @@ function listItems(items, actualPage, limitItems) {
 const pages = document.querySelector(".pages");
 
 
-
 function createPagination() {
     let html = '';
     html += `<li class="button page-previous-plus ${pageActual < 4? 'unClick':''}"><<</li>`
@@ -108,29 +108,54 @@ function createPagination() {
 pages.addEventListener('click', (e) => {
     if (e.target.classList.contains('page')) {
         containerItems.innerHTML = '';
-        listItems(data['items_list'], Number(e.target.textContent), 10).forEach((weapon) => {
+        listItems(itemsToShow, Number(e.target.textContent), 10).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-next')) {
         containerItems.innerHTML = '';
-        listItems(data['items_list'], pageActual + 1, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual + 1, 10).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-previous')&& pageActual > 1) {
         containerItems.innerHTML = '';
-        listItems(data['items_list'], pageActual - 1, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual - 1, 10).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-next-plus')) {
         containerItems.innerHTML = '';
-        listItems(data['items_list'], pageActual + 4, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual + 4, 10).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-previous-plus') && pageActual > 5) {
         containerItems.innerHTML = '';
-        listItems(data['items_list'], pageActual - 4, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual - 4, 10).forEach((weapon) => {
             renderItem(weapon)
         });
     }
+    createPagination()
+})
+
+function filterObject(obj, callback) {
+    return Object.fromEntries(Object.entries(obj).
+      filter(([key, val]) => callback(val, key)));
+  }
+
+search.addEventListener('keyup', (e) => {
+    let itemsFiltered = []
+    const searchValue = e.target.value.trim().toLowerCase();
+    const filteredWeapons = filterObject(data['items_list'], (weapon) => {
+        if(weapon.name.toLowerCase().includes(searchValue)) {
+        return weapon;
+        }
+    })
+    containerItems.innerHTML = '';
+    console.log(filteredWeapons)
+    Object.keys(filteredWeapons).forEach((weapon) => {
+        itemsFiltered.push(data['items_list'][weapon])
+    })
+    listItems(itemsFiltered, 1, 10).forEach((weapon) => {
+        renderItem(weapon)
+    });
+    itemsToShow = itemsFiltered;
     createPagination()
 })
