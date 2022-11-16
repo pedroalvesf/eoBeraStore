@@ -1,6 +1,18 @@
 
 const containerItems = document.querySelector(".container-itens");
 const search = document.querySelector("#search");
+
+const containerMiddleFilter = document.querySelector(".filter-itens-middle");
+
+const containerForm = document.querySelector(".container-modal");
+const btnLogin = document.querySelector(".login");
+const btnRegister = document.querySelector(".register")
+const containerModal = document.querySelector(".container-modal")
+
+const btnCloseForm = document.querySelector(".form-close-btn");
+
+const usersCheckBox = document.querySelector("#privacy-policy")
+
 let data, pageActual, itemsToShow = [];
 
 let weaponsList = [
@@ -16,14 +28,14 @@ async function getDb() {
     const res = await fetch("./src/img/csgoitems.JSON");
     data = await res.json();
     itemsToShow = data['items_list'];
-    listItems(itemsToShow, 1, 10).forEach((weapon) => {
+    listItems(itemsToShow, 1, 18).forEach((weapon) => {
         renderItem(weapon)
     });
     createPagination()
 }
 getDb()
 
-function createCard(weaponLink, weaponName, weaponImg, weaponPrice, weaponExterior, inspectInGameLink, weaponStatTrack) {
+function createCard(weaponLink, weaponName, weaponImg, weaponPrice, weaponExterior, weaponStatTrack) {
     const html = `<div class="card-item">
     <h3>
         <a href="${weaponLink}">${weaponName}</a>
@@ -32,19 +44,15 @@ function createCard(weaponLink, weaponName, weaponImg, weaponPrice, weaponExteri
             `<div class="stattrack">
     <p>StatTrack</p>
     </div>` : ''}
-    <a>
+    <div class="container-weapon-image">
     <img src="${weaponImg}">
-    </a>
+    </div>
     <div class="price">
         <p>${weaponPrice}</p>
     </div>
     ${weaponExterior != 'undefined'? `<div class="exterior">
         <p>${weaponExterior}</p>
     </div>`: ''}
-    <div class="btn-inspect">
-    <p><a  class="text-btn-inspect" href="${inspectInGameLink}">Inspect in game</a></p>
-    <p><a  class="text-btn-inspect" href="#">Steam linking</a></p>
-    </div>
 </div>`
     return html;
 }
@@ -57,7 +65,6 @@ function renderItem(weapon) {
         `https://community.cloudflare.steamstatic.com/economy/image/${weapon.icon_url}`,
         `U$${weapon.price["7_days"].median != 'undefined'? weapon.price["7_days"].median : '0.00'}`,
         `${weapon.exterior}`,
-        '',
         weapon.stattrak
         ));
     } catch (error) {
@@ -104,27 +111,27 @@ function createPagination() {
 pages.addEventListener('click', (e) => {
     if (e.target.classList.contains('page')) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, Number(e.target.textContent), 10).forEach((weapon) => {
+        listItems(itemsToShow, Number(e.target.textContent), 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-next')) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual + 1, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual + 1, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-previous')&& pageActual > 1) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual - 1, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual - 1, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-next-plus')) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual + 4, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual + 4, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }else if(e.target.classList.contains('page-previous-plus') && pageActual > 5) {
         containerItems.innerHTML = '';
-        listItems(itemsToShow, pageActual - 4, 10).forEach((weapon) => {
+        listItems(itemsToShow, pageActual - 4, 18).forEach((weapon) => {
             renderItem(weapon)
         });
     }
@@ -137,9 +144,9 @@ function filterObject(obj, callback) {
     filter(([key, val]) => callback(val, key)));
 }
 
-function filterItems(e){
+function filterItems(){
     let itemsFiltered = []
-    const searchValue = e.target.value.trim().toLowerCase();
+    const searchValue = search.value.trim().toLowerCase();
     const filteredWeapons = filterObject(data['items_list'], (weapon) => {
         if(weapon.name.toLowerCase().includes(searchValue)) {
         return weapon;
@@ -149,14 +156,14 @@ function filterItems(e){
     Object.keys(filteredWeapons).forEach((weapon) => {
         itemsFiltered.push(data['items_list'][weapon])
     })
-    listItems(itemsFiltered, 1, 10).forEach((weapon) => {
+    listItems(itemsFiltered, 1, 18).forEach((weapon) => {
         renderItem(weapon)
     });
     return itemsFiltered;
 }
 
-search.addEventListener('keyup', (e) => {
-    itemsToShow = filterItems(e)
+search.addEventListener('keyup', () => {
+    itemsToShow = filterItems()
     createPagination()
 })
 
@@ -164,3 +171,36 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+function chooseItemFilter(event){
+    search.value = event.target.textContent == "All"? '':event.target.textContent;
+    itemsToShow = filterItems()
+    createPagination()
+}
+
+containerMiddleFilter.addEventListener('click', chooseItemFilter);
+
+
+
+
+// function openForm(classe){
+//     const form = document.querySelector(classe)
+//     form.classList.toggle("show");
+// }
+
+
+btnRegister.addEventListener('click', ()=>{
+    containerModal.id = "showUp";
+})
+
+btnCloseForm.addEventListener('click', () =>{
+    containerModal.id = "";
+})
+
+
+
+
+
+
+
+

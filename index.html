@@ -27,29 +27,35 @@
                 </div>
             </div>
         </div>
-</div>
-
-<header class="container-header">
-    <div class="header-left">
-        <div class="container-logo">
-            <img src="./src/img/logo-test.jpeg" alt="logo cs:go store" class="logo">
-            <p>EoBera Store</p>
-        </div>
-        <div class="container-search">
-            <input type="text" name="search" id="search" placeholder=" Pesquisar...">
-            <!-- <i class="fa-regular fa-magnifying-glass"></i> -->
-        </div>
-    </div>
-    <div class = "header-middle">
-        <div class="button-wish">Wish List</div>
     </div>
 
-    <div class="container-login">
-        <div class="button cart">Cart</div>
-        <div class="button login">Sing-in</div>
-        <div class="button register">Sing-up</div>
-    </div>
-</header>
+    <header class="container-header">
+
+        <div class="header-left">
+            <div class="container-logo">
+                <a href="index.html">
+                    <img src="./src/img/logo-test.jpeg" alt="logo cs:go store" class="logo">
+                </a>
+                <a href="index.html">
+                    <p>EoBera Store</p>
+                </a>
+            </div>
+
+            <div class="container-search">
+                <input type="text" name="search" id="search" placeholder=" Pesquisar...">
+                <!-- <i class="fa-regular fa-magnifying-glass"></i> -->
+            </div>
+        </div>
+        <div class="header-middle">
+            <div class="button-wish">Wish List</div>
+        </div>
+
+        <div class="container-login">
+            <div class="button cart">Cart</div>
+            <div class="button login">Sing-in</div>
+            <div class="button register">Sing-up</div>
+        </div>
+    </header>
 
     <!-- <div class="container-list-type">
         <li class="list-type">
@@ -69,11 +75,89 @@
         </li>
 
     </div> -->
-  
+    <div class="container-filter-itens">
+        <div class="dropdown">
+            <div class="filter-itens-order dropdown-type button">Order by</div>
+            <div class="dropdown-content">
+                <div>Highest Price</div>
+                <div>Lowest Price </div>
+                <div>Lowest Float</div>
+                <div>Highest Float</div>
+                <div>Just In</div>
+            </div>
+        </div>
+        <div class="filter-itens-middle">
+            <div class="dropdown-type button all">All</div>
+            <div class="dropdown">
+                <div class="dropdown-type button">Knife</div>
+                <div class="dropdown-content">
+                    <div>Butterfly</div>
+                    <div>Karambit</div>
+                    <div>Falchion</div>
+                    <div>Guts</div>
+                    <div>Ursos</div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-type button">Gloves</div>
+                <div class="dropdown-content">
+                    <div>Sport Gloves</div>
+                    <div>Driver Gloves</div>
+                    <div>Hand Wrap</div>
+                    <div>Moto Gloves</div>
+                    <div>Specialist Gloves</div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-type button">Rifles</div>
+                <div class="dropdown-content">
+                    <div>M4A1-S</div>
+                    <div>M4A4</div>
+                    <div>Ak-47</div>
+                    <div>AWP</div>
+                    <div>Famas</div>
+                    <div>Galil</div>
+                    <div>Mata Pombo</div>
+                    <div>AUG</div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-type button">Pistol</div>
+                <div class="dropdown-content">
+                    <div>USP-S</div>
+                    <div>Desert</div>
+                    <div>Glock</div>
+                    <div>Tec-9</div>
+                    <div>Five-Seven</div>
+                    <div>P250</div>
+                    <div>Revolver</div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-type button">SMG</div>
+                <div class="dropdown-content">
+                    <div>MAC-10</div>
+                    <div>UMP-45</div>
+                    <div>MP7</div>
+                    <div>MP9</div>
+                    <div>P90</div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="dropdown-type button">Heavy</div>
+                <div class="dropdown-content">
+                    <div>XM1014</div>
+                    <div>MAG-7</div>
+                    <div>Negev</div>
+                    <div>M249</div>
+                    <div>Nova</div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-itens-filter button">Filter</div>
+    </div>
     <div class="container-itens">
     </div>
-
-
     <!-- <div class="container-first">
         <img class="img-csgo"src="#">
         <img class="img-csgo"src="#">
@@ -82,8 +166,65 @@
     <footer class="footer">
         <p>Developed by Pedro Alves and Luiz Pereira </p>
     </footer>
+
+    <modal>
+        <div class="container-modal">
+            
+            <form class="personal-info">
+                <div class="form-close-btn">&times;</div>
+                <div class="personal-info-title">Personal Information</div>
+            <div class="form-name-surname">
+                <label for="name">
+                    Name:  
+                    <input type=text name="name" placeholder="Name">
+                </label>
+                <label for="surname">
+                    Surname:
+                    <input type=text name="surname" placeholder="Surname">
+                </label>
+            </div>
+                <label for="gclvl">
+                    GC Lvl:
+                    <input type=number name="gclvl" placeholder="Gc lvl">
+                </label>
+                <label for="steam-number">
+                    Steam number:
+                    <input type=text name="steam-number" placeholder="Steam number">
+                </label>
+                <label for="email">
+                    Email:
+                    <input type="email" name="email" placeholder="Email">
+                </label>
+                <div class="form-password">
+                <label for="password">
+                    Password:
+                    <input type="password" name="password" placeholder="Password">
+                </label>
+                <label for="password-check">
+                    Password Check:
+                    <input type="password" name="password" placeholder="Password-check">
+                </label>
+            </div>
+                <label for="date">
+                    Date of birth:
+                    <input type="date" name="date">
+                </label>
+                <label>
+                <input type="checkbox" name="promotions">
+                <span> Do you accept to receive our exclusive promotions? </span>
+            </label>
+            <label>
+                <input type="checkbox" name="user-terms" id="privacy-policy">
+                <span> Read and accept every <strong>terms of use</strong>  and <strong>privacy policys </strong></span>
+            </label>
+
+                <div class="submit button">Submit</div>
+
+            </form>
+                
+        </div>
+    </modal>
     <script src="script.js"></script>
 </body>
 
 </html>
-
