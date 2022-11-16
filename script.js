@@ -13,6 +13,7 @@ const usersCheckBox = document.querySelector("#privacy-policy");
 
 let data,
   pageActual,
+  inWhishList = false,
   itemsToShow = [];
 
 let wishlist = [
@@ -136,6 +137,7 @@ function createPagination() {
   html += `<li class="button page-next-plus">>></li>`;
   html += `<li class="button page">${pageActual + 40}</li>`;
   pages.innerHTML = html;
+  inWhishList = false;
 }
 
 pages.addEventListener("click", (e) => {
@@ -243,8 +245,10 @@ function selectedSkin(event) {
   } else {
     let removedItem = wishlist.indexOf(skinChoosedName);
     wishlist.splice(removedItem, 1);
+    if (inWhishList){
+      event.target.parentNode.parentNode.remove()
+    }
   }
-
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
 
@@ -271,6 +275,7 @@ function openWishList() {
     renderItem(weapon);
   });
   createPagination();
+  inWhishList = true;
 }
 wishListDOM.addEventListener("click", openWishList);
 

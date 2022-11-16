@@ -177,7 +177,7 @@ body {
   position: absolute;
   border-radius: 10px;
   background-color: #090d11;
-  z-index: 5;
+  z-index: 3;
 }
 .dropdown-content div {
   padding: 15px;
