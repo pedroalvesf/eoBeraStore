@@ -15,15 +15,6 @@ const usersCheckBox = document.querySelector("#privacy-policy")
 
 let data, pageActual, itemsToShow = [];
 
-let weaponsList = [
-    'AWP | Electric Hive (Field-Tested)',
-    'USP-S | Printstream (Field-Tested)'
-]
-
-if (JSON.parse(localStorage.getItem('weaponList'))) {
-    weaponsList = JSON.parse(localStorage.getItem('weaponList'))
-}
-
 async function getDb() {
     const res = await fetch("./src/img/csgoitems.JSON");
     data = await res.json();
