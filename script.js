@@ -1,6 +1,18 @@
 
 const containerItems = document.querySelector(".container-itens");
 const search = document.querySelector("#search");
+
+const containerMiddleFilter = document.querySelector(".filter-itens-middle");
+
+const containerForm = document.querySelector(".container-modal");
+const btnLogin = document.querySelector(".login");
+const btnRegister = document.querySelector(".register")
+const containerModal = document.querySelector(".container-modal")
+
+const btnCloseForm = document.querySelector(".form-close-btn");
+
+const usersCheckBox = document.querySelector("#privacy-policy")
+
 let data, pageActual, itemsToShow = [];
 
 let weaponsList = [
@@ -132,9 +144,9 @@ function filterObject(obj, callback) {
     filter(([key, val]) => callback(val, key)));
 }
 
-function filterItems(e){
+function filterItems(){
     let itemsFiltered = []
-    const searchValue = e.target.value.trim().toLowerCase();
+    const searchValue = search.value.trim().toLowerCase();
     const filteredWeapons = filterObject(data['items_list'], (weapon) => {
         if(weapon.name.toLowerCase().includes(searchValue)) {
         return weapon;
@@ -150,8 +162,8 @@ function filterItems(e){
     return itemsFiltered;
 }
 
-search.addEventListener('keyup', (e) => {
-    itemsToShow = filterItems(e)
+search.addEventListener('keyup', () => {
+    itemsToShow = filterItems()
     createPagination()
 })
 
@@ -159,3 +171,36 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+function chooseItemFilter(event){
+    search.value = event.target.textContent == "All"? '':event.target.textContent;
+    itemsToShow = filterItems()
+    createPagination()
+}
+
+containerMiddleFilter.addEventListener('click', chooseItemFilter);
+
+
+
+
+// function openForm(classe){
+//     const form = document.querySelector(classe)
+//     form.classList.toggle("show");
+// }
+
+
+btnRegister.addEventListener('click', ()=>{
+    containerModal.id = "showUp";
+})
+
+btnCloseForm.addEventListener('click', () =>{
+    containerModal.id = "";
+})
+
+
+
+
+
+
+
+
