@@ -78,8 +78,16 @@ function createCard(
   return html;
 }
 
+function renderItems () {
+  containerItems.innerHTML = "";
+  listItems(itemsToShow, 1, 18).forEach((weapon) => {
+    renderItem(weapon);
+  });
+  createPagination();
+}
+
+
 function renderItem(weapon) {
-  try {
     containerItems.insertAdjacentHTML(
       "beforeEnd",
       createCard(
@@ -87,18 +95,15 @@ function renderItem(weapon) {
         weapon.name,
         `https://community.cloudflare.steamstatic.com/economy/image/${weapon.icon_url}`,
         `U$${
-          weapon.price["7_days"].median != "undefined"
-            ? weapon.price["7_days"].median
-            : "0.00"
+          weapon.price["7_days"] == null
+            ? weapon.price["all_time"].median
+            :  weapon.price["7_days"].median
         }`,
         `${weapon.exterior}`,
         weapon.stattrak
       )
     );
     addEventsHearts();
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 //pagination
@@ -219,11 +224,6 @@ function chooseItemFilter(event) {
 
 containerMiddleFilter.addEventListener("click", chooseItemFilter);
 
-// function openForm(classe){
-//     const form = document.querySelector(classe)
-//     form.classList.toggle("show");
-// }
-
 btnRegister.addEventListener("click", () => {
   containerModal.id = "showUp";
 });
@@ -269,18 +269,51 @@ function openWishList() {
     wishListArray.push(data["items_list"][weapon]);
   });
   itemsToShow = wishListArray;
-  containerItems.innerHTML = "";
-  listItems(itemsToShow, 1, 18).forEach((weapon) => {
-    console.log(weapon.name);
-    renderItem(weapon);
-  });
-  createPagination();
+  renderItems()
   inWhishList = true;
 }
 wishListDOM.addEventListener("click", openWishList);
 
-// recarregar wishlist quando tirar coração
-
 window.onload = () => {
   addEventsHearts();
 };
+
+const highestPriceFilterBtn = document.querySelector('.highestPrice')
+const lowestPriceFilterBtn = document.querySelector('.lowestPrice')
+
+sortByPrice = (highest) => {
+  itemsToShow.sort((a, b) => {
+    if(a.price == null || b.price == null){
+      return 1
+    }
+    if([a.price['7_days'] == null || 0] || [b.price['7_days'] == 0 || null]){
+      return highest ? parseFloat(b.price['all_time'].median) - parseFloat(a.price['all_time'].median) : parseFloat(a.price['all_time'].median) - parseFloat(b.price['all_time'].median);
+    }
+    return highest ? parseFloat(b.price['7_days'].median) - parseFloat(a.price['7_days'].median): parseFloat(a.price['7_days'].median) - parseFloat(b.price['7_days'].median)
+  });
+}
+
+function objToArray (obj) {
+  if(!Array.isArray(obj)){
+    console.log('não é array')
+    array = []
+
+    Object.keys(obj).forEach((item) => {
+      array.push(obj[item]);
+    });
+    return array
+  }
+  return obj
+}
+
+lowestPriceFilterBtn.addEventListener('click', () => {
+    itemsToShow = objToArray (itemsToShow)
+    sortByPrice(false)
+    renderItems()
+})
+
+highestPriceFilterBtn.addEventListener('click', () => {
+  itemsToShow = objToArray (itemsToShow)
+  sortByPrice(true)
+  renderItems()
+})
