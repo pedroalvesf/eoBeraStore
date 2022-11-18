@@ -2,14 +2,13 @@ const containerItems = document.querySelector(".container-itens");
 const cardItens = document.querySelectorAll(".card-item ");
 const search = document.querySelector("#search");
 const containerMiddleFilter = document.querySelector(".filter-itens-middle");
-const containerForm = document.querySelector(".container-modal");
 const btnLogin = document.querySelector(".login");
 const btnRegister = document.querySelector(".register");
 const containerModal = document.querySelector(".container-modal");
-
+const containerModalItem = document.querySelector(".container-modal-item");
 const btnCloseForm = document.querySelector(".form-close-btn");
-
 const usersCheckBox = document.querySelector("#privacy-policy");
+const btnCloseModalItem = document.querySelector(".form-close-modal");
 
 let data,
   pageActual,
@@ -34,6 +33,7 @@ async function getDb() {
     renderItem(weapon);
   });
   createPagination();
+  showCardModal();
 }
 getDb();
 
@@ -230,6 +230,7 @@ btnRegister.addEventListener("click", () => {
 
 btnCloseForm.addEventListener("click", () => {
   containerModal.id = "";
+  containerModalItem.id = "";
 });
 /////////////// Wish List
 
@@ -317,3 +318,104 @@ highestPriceFilterBtn.addEventListener('click', () => {
   sortByPrice(true)
   renderItems()
 })
+
+
+
+
+function newZoom(){
+  let scale = 1;
+  const el = document.querySelector('.detail-view');
+  el.onwheel = (event) =>{
+    scale += event.deltaY * -0.01;
+    // Restrict scale
+    scale = Math.min(Math.max(.125, scale), 4);
+    // Apply scale transform
+    el.style.transform = `scale(${scale < 1?1:scale})`;
+  };
+  el.addEventListener('wheel', (event) =>{
+    scale += event.deltaY * -0.01;
+    // Restrict scale
+    scale = Math.min(Math.max(.125, scale), 4);
+    // Apply scale transform
+    el.style.transform = `scale(${scale < 1?1:scale})`;
+  });
+  let inImg = false;
+  el.addEventListener("mousemove", (e) =>{
+    inImg = true;
+    const x = e.clientX - e.target.offsetLeft;
+    const y = e.clientY -e.target.offsetTop;
+    el.style.transformOrigin = `${x}px ${y}px`;
+    el.style.transform = `scale(${scale < 1?1:scale})`;
+  });
+  el.addEventListener("mouseenter", () =>{
+    scale=1.05
+  })
+  el.addEventListener("mouseleave", () =>{
+    inImg = false;
+    el.style.transformOrigin = "center center";
+    el.style.transoform = "scale(1)";
+  })
+}
+
+
+// const containerItems = document.querySelector(".container-itens");
+// const cardItens = document.querySelectorAll(".card-item ");
+
+btnCloseModalItem.addEventListener('click', () =>{
+  containerModalItem.id = ''
+})
+
+
+function showCardModal(){
+  const cardItens = document.querySelectorAll(".card-item ");
+cardItens.forEach((card) =>{
+  card.addEventListener("click", (event) => {
+    if(event.target.tagName.toLowerCase() == 'img'){
+      containerModalItem.id = "showUp";
+      const weapomModalSelection = event.target.parentNode.parentNode.firstElementChild.firstElementChild.innerText;
+      const filteredWeapon = filterObject(data["items_list"], (weapon) => {
+        if (weapon.name.toLowerCase().includes(weapomModalSelection.trim().toLowerCase())) {
+          return weapon;
+        }
+      });
+      console.log(weapomModalSelection)
+      const htmlModal =
+      `<div class="form-close-btn form-close-modal">&times;</div>
+      <div class="container-modal-item-intern">
+        <div class="container-modal-item-left">
+            <div class="container-item-left-img">
+          <img class="detail-view" src="https://community.cloudflare.steamstatic.com/economy/image/${filteredWeapon[weapomModalSelection].icon_url_large}"/>
+        </div>
+          <div class="containier-modal-item-left-footer">
+            <div>Inspect Online</div>
+            <div>Make an offer</div>
+            <div>Check prices</div>
+            <div>tarantam</div>
+          </div>
+        </div>
+        <div class="container-modal-item-right">
+          <div class="modal-item-name-exterior">${filteredWeapon[weapomModalSelection].gun_type} | ${filteredWeapon[weapomModalSelection].weapon }</div>
+          <div class="modal-item-skin-name"><strong>${filteredWeapon[weapomModalSelection].name}</strong></div>
+          <!-- <div class="container-modal-info"></div> -->
+          <div class="price-steam">${filteredWeapon[weapomModalSelection].price['7_days'].median}</div>
+          <div class="item-price"><h2>Our price: ${filteredWeapon[weapomModalSelection].price['7_days'].median}</h2></div>
+          <button class="btn-add-cart button">ADD TO CARD</button>
+        </div>
+      </div>`
+      containerModalItem.innerHTML = htmlModal;
+      newZoom();
+    }
+
+})
+})
+}
+function modalItem() {
+
+const searchValue = search.value.trim().toLowerCase();
+
+  const filteredWeapons = filterObject(data["items_list"], (weapon) => {
+    if (weapon.name.toLowerCase().includes(searchValue)) {
+      return weapon;
+    }
+  });
+}

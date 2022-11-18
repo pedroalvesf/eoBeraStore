@@ -424,3 +424,97 @@ form input {
   border-radius: 10px;
   padding-left: 10px;
 }
+
+.container-modal-item {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  background-color: #1c1e22ee;
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-modal-item-intern{
+  width: 60vw;
+  height: 40vh;
+  background-color: #13151adc;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+#showUp {
+  display: flex;
+}
+
+.container-modal-item-left {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container-modal-item-left img{
+width: 100%;
+
+}
+.container-item-left-img {
+  overflow: hidden;
+}
+
+.containier-modal-item-left-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.container-modal-item-right {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 20px;
+}
+
+.container-modal-info{
+  width: 100%;
+  height: 25%;
+  background-color: rgba(46, 43, 38, 0.322);
+}
+
+.btn-add-cart{
+  display: flex;
+  align-self: flex-start;
+  justify-content: center;
+  background-color: #AFA2FC;
+  color: white;
+  border: none;
+  width: 100%;
+
+}
+/* 
+.detail-view{
+  image: url("./src/img/usp-printstream.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+
+} */
+
+/* .fa-solid{
+  height: 12px;
+  width: 1%;
+  position: relative;
+  fill: white;
+  background-color: white;
+
+} */
